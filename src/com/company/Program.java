@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Program {
 //    static ITree<Integer> rbtree = new RedBlackTree<>();
-//    static ITree<Integer> tree = new BinaryTree<>();
+    static Tree<Integer> tree = new BinaryTree<>();
     private static Scanner scanner = new Scanner(System.in);
 
 
@@ -15,7 +15,7 @@ public class Program {
         do {
             index = menu.choose();
             if (index == 0) {
-//                insert();
+                insert();
             } else if (index == 1) {
 //                insertRandom();
             } else if (index == 2) {
@@ -32,7 +32,9 @@ public class Program {
 //                rbtree.Print();
                 scanner.nextLine();
             } else if (index == 8) {
-//                tree.Print();
+                System.out.println("Binary tree:");
+                tree.print();
+                System.out.println("Press ENTER to continue...");
                 scanner.nextLine();
             } else if (index == 9) {
 //                DemoFirst();
@@ -47,35 +49,25 @@ public class Program {
 
     }
 
-    /*static int ReadInt(string title) {
-        bool result = false;
-        int i;
-        do {
-            Console.Write(title);
-            result = int.TryParse(Console.ReadLine(), out i);
-        } while (!result);
-        return i;
-    }
-
     static void insert() {
 
-        int i = ReadInt("Key = ");
+        System.out.println("key = ");
+        int i = scanner.nextInt();
+        scanner.nextLine();
 
-        if (tree.Add(i)) {
+        if (tree.add(i)) {
             System.out.println("Key " + i + " was added in tree");
         } else {
             System.out.println("Key " + i + " was NOT added in tree");
         }
-        if (rbtree.Add(i)) {
-            System.out.println("Key " + i + " was added in rb-tree");
-        } else {
-            System.out.println("Key " + i + " was NOT added in rb-tree");
-        }
-
-        System.out.ReadKey(false);
+//        if (rbtree.Add(i)) {
+//            System.out.println("Key " + i + " was added in rb-tree");
+//        } else {
+//            System.out.println("Key " + i + " was NOT added in rb-tree");
+//        }
     }
 
-    static void insertRandom() {
+    /*static void insertRandom() {
         int count;
         do {
             count = ReadInt("Count = ");
