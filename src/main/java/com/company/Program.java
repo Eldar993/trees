@@ -1,13 +1,11 @@
 package com.company;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class Program {
-//    static ITree<Integer> rbtree = new RedBlackTree<>();
+    //    static ITree<Integer> rbtree = new RedBlackTree<>();
     static Tree<Integer> tree = new BinaryTree<>();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -21,11 +19,11 @@ public class Program {
             if (index == 0) {
                 insert();
             } else if (index == 1) {
- //               insertRandom();
+                insertRandom();
             } else if (index == 2) {
                 delete();
             } else if (index == 3) {
-               clear();
+                clear();
             } else if (index == 4) {
                 contain();
             } else if (index == 5) {
@@ -41,10 +39,10 @@ public class Program {
                 System.out.println("Press ENTER to continue...");
                 scanner.nextLine();
             } else if (index == 9) {
-//                DemoFirst();
+                DemoFirst();
                 scanner.nextLine();
             } else if (index == 10) {
-//                DemoSecond();
+                DemoSecond();
                 scanner.nextLine();
             } else if (menu.isLastItem(index)) {
                 return;
@@ -53,7 +51,7 @@ public class Program {
 
     }
 
-    static void insert() {
+    private static void insert() {
 
         System.out.print("key = ");
         int i = scanner.nextInt();
@@ -71,7 +69,7 @@ public class Program {
 //        }
     }
 
-    /*static void insertRandom() {
+    private static void insertRandom() {
         int count;
         do {
             System.out.println("Count = ");
@@ -79,10 +77,10 @@ public class Program {
         } while (count <= 0);
 
 
-        List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem("random    ", "1"));
-        items.add(new MenuItem("ascending ", '2'));
-        items.add(new MenuItem("descending", '3'));
+        List<Menu.MenuItem> items = new ArrayList<>();
+        items.add(new Menu.MenuItem("random    ", "1"));
+        items.add(new Menu.MenuItem("ascending ", "2"));
+        items.add(new Menu.MenuItem("descending", "3"));
 
         Menu submenu = new Menu();
         submenu.setItems(items);
@@ -93,10 +91,10 @@ public class Program {
             if (index == 0) {
                 break;
             } else if (index == 1) {
-                list.sort();
+                Collections.sort(list);
                 break;
             } else if (index == 2) {
-                list.sort((a, b) => -1 * a.CompareTo(b));
+                list.sort(Comparator.reverseOrder());
                 break;
             }
         } while (true);
@@ -104,12 +102,12 @@ public class Program {
         int addedInTree = fill(list, tree);
         //int addedInRBTree = Fill(list, rbtree);
         System.out.println("Try to add " + list.size() + " element(s): ");
-        System.out.println(String.join(", ", list));
+        System.out.println(list);
         System.out.println(addedInTree + " node(s) was added in binary search tree");
         //System.out.println(addedInRBTree + " node(s) was added  in red black tree");
-    }*/
+    }
 
-    static void delete() {
+    private static void delete() {
         System.out.println("Deleted node = ");
         int i = scanner.nextInt();
         if (tree.delete(i)) {
@@ -124,13 +122,13 @@ public class Program {
         }*/
     }
 
-    static void clear() {
+    private static void clear() {
         tree.clear();
         //rbtree.clear();
         System.out.println("Binary search and red black trees were cleared");
     }
 
-    static void contain() {
+    private static void contain() {
         System.out.println("Contains node = ");
         int i = scanner.nextInt();
         if (tree.contains(i)) {
@@ -145,18 +143,18 @@ public class Program {
         }*/
     }
 
-    static void size() {
+    private static void size() {
         System.out.println("Tree size:  " + tree.size());
         //System.out.println("RB-Tree size:  " + rbtree.Size());
     }
 
-    static void height() {
+    private static void height() {
         System.out.println("Tree height:  " + tree.height());
         //System.out.println("RB-Tree height:  " + rbtree.height());
         //System.out.println("RB-Tree black height:  " + ((RedBlackTree<Integer>)rbtree).BlackHeight());
     }
 
-    /*static void Demo(List<Integer> list, boolean visibleElements) {
+    static void Demo(List<Integer> list, boolean visibleElements) {
         System.out.println("Clear trees...");
         tree.clear();
         //rbtree.clear();
@@ -169,10 +167,10 @@ public class Program {
                     
         }
 
-        int addedInTree = Fill(list, tree);
+        int addedInTree = fill(list, tree);
         //int addedInRBTree = Fill(list, rbtree);
         System.out.println(addedInTree + " node(s) was added in binary search tree");
-        System.out.println(addedInRBTree + " node(s) was added  in red black tree");
+        //System.out.println(addedInRBTree + " node(s) was added  in red black tree");
         System.out.println("Deleting the same " + list.size() + " eletemt(-s)...");
         int noDelete = 0;
         int noDeleteRB = 0;
@@ -182,9 +180,9 @@ public class Program {
                 ++noDelete;
             }
 
-            if (!rbtree.Delete(i)) {
+            //if (!rbtree.Delete(i)) {
                 //++noDeleteRB;
-            }
+            //}
         }
 
         System.out.println(noDelete + " value(-s) could not be deleted in tree");
@@ -206,38 +204,38 @@ public class Program {
         System.out.println("\n\nPress any key to continue...");
     }
 
-    static void DemoFirst() {
+    private static void DemoFirst() {
         System.out.println("           -= DEMO case#1 =-");
-        List<Integer> list = new ArrayList<Integer>(
-                new int[] { 206043, 423728, 390348, 175224, 588825, 477871, 567496, 905545, 262916, 247149 });
+        List<Integer> list = new ArrayList<>(Arrays.asList(
+                206043, 423728, 390348, 175224, 588825, 477871, 567496, 905545, 262916, 247149));
         Demo(list, true);
     }
 
-    static void DemoSecond() {
+    private static void DemoSecond() {
         System.out.println("           -= DEMO case#2 =-");
         List<Integer> list = generateList(1000000, 1000000);
 
         Demo(list, false);
     }
 
-    static List<Integer> generateList(int size, int maxValue) {
-        Random random = new Random();
-        List<Integer> list = new ArrayList<Integer>();
-        System.out.println($"Generate {size} element(-s) in range=[1,{maxValue}]...");
+    private static List<Integer> generateList(int size, int maxValue) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        List<Integer> list = new ArrayList<>();
+        System.out.printf("Generate %d element(-s) in range=[1,%d]...", size, maxValue);
 
         for (int i = 1; i <= size; i++) {
-            list.add(random.next(1, maxValue));
+            list.add(random.nextInt(1, maxValue));
         }
         return list;
     }
 
-    static int fill<T>(List<T> list, Tree<T> tree) where T : Comparable<T> {
+    private static <T extends Comparable<T>> int fill(List<T> list, Tree<T> tree) {
         int count = 0;
-        for(T element : list) {
+        for (T element : list) {
             if (tree.add(element)) {
                 count++;
             }
         }
         return count;
-    }*/
+    }
 }
