@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 class Menu {
-    private class MenuItem  {
+    public static class MenuItem  {
 
         private String title;
         private String key;
-        private MenuItem(String title, String key) {
+        public MenuItem(String title, String key) {
             this.title = title;
             this.key = key;
         }
