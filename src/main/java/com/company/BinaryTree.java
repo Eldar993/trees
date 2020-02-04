@@ -37,9 +37,8 @@ class BinaryTree<T extends Comparable<T>> implements Tree<T> {
             currentRoot.left = add(key, currentRoot.left);
         } else if (key.compareTo(currentRoot.key) > 0) {
             currentRoot.right = add(key, currentRoot.right);
-        } else {        //if (key == currentRoot.key)
-            throw new IllegalArgumentException("Duplicated key: " + key);
         }
+
         return currentRoot;
     }
 
@@ -60,12 +59,9 @@ class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public boolean add(T key) {      // user addition
-        try {
-            root = add(key, root);
-            return root != null;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        int prevSize = size;
+        root = add(key, root);
+        return size == prevSize + 1;
     }
 
     private void print(Node currentRoot, String prefix) {    //suplemented recursive print
