@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class Program {
+public class DemoRunner {
     //    static ITree<Integer> rbtree = new RedBlackTree<>();
     static Tree<Integer> tree = new BinaryTree<>();
     private static Scanner scanner = new Scanner(System.in);
