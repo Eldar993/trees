@@ -69,4 +69,22 @@ class BinaryTreeTest {
             Assertions.assertSame(3, size);
         }
     }
+
+    @Test
+    void SizeAfterDelete() {
+        //given
+        Set<String> values = new HashSet<>();
+        values.add("5");
+        values.add("7");
+        values.add("3");
+
+
+            //when
+            tree.delete("5");
+
+            //then
+            Assertions.assertEquals(2, values.size());
+    }
+
+
 }
